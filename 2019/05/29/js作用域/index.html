@@ -96,14 +96,20 @@
 
 
 
-  <meta name="keywords" content="前端、js、react、vue、php、objective-C">
-<meta property="og:type" content="website">
-<meta property="og:title" content="朱举东博客">
-<meta property="og:url" content="/index.html">
+  <meta name="description" content="在看了js高级程序设计的作用域相关知识之后，正好看到冴羽的原型原型链、词法作用域相关文章之后觉得自己有必要将自己的理解写下来。 块级作用域在es5中是没有块级作用域的，所以会出现一些有趣的现象，如下面这段代码 1234if (true) &amp;#123;   var myName = &quot;Jack&quot;;&amp;#125;console.log(myName); // &quot;Jack&quot; 这一点是和其他语言有区别的，记">
+<meta name="keywords" content="js高级程序设计,冴羽的博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js作用域">
+<meta property="og:url" content="/2019/05/29/js作用域/index.html">
 <meta property="og:site_name" content="朱举东博客">
+<meta property="og:description" content="在看了js高级程序设计的作用域相关知识之后，正好看到冴羽的原型原型链、词法作用域相关文章之后觉得自己有必要将自己的理解写下来。 块级作用域在es5中是没有块级作用域的，所以会出现一些有趣的现象，如下面这段代码 1234if (true) &amp;#123;   var myName = &quot;Jack&quot;;&amp;#125;console.log(myName); // &quot;Jack&quot; 这一点是和其他语言有区别的，记">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/images/作用域@2x.png">
+<meta property="og:updated_time" content="2019-06-02T10:08:02.388Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="朱举东博客">
+<meta name="twitter:title" content="js作用域">
+<meta name="twitter:description" content="在看了js高级程序设计的作用域相关知识之后，正好看到冴羽的原型原型链、词法作用域相关文章之后觉得自己有必要将自己的理解写下来。 块级作用域在es5中是没有块级作用域的，所以会出现一些有趣的现象，如下面这段代码 1234if (true) &amp;#123;   var myName = &quot;Jack&quot;;&amp;#125;console.log(myName); // &quot;Jack&quot; 这一点是和其他语言有区别的，记">
+<meta name="twitter:image" content="/images/作用域@2x.png">
 
 
 
@@ -111,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="/2019/05/29/js作用域/">
 
 
 
@@ -121,7 +127,7 @@
   };
 </script>
 
-  <title>朱举东博客</title>
+  <title>js作用域 | 朱举东博客</title>
   
 
 
@@ -169,8 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -208,7 +213,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -328,9 +333,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -362,10 +367,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/29/js作用域/" class="post-title-link" itemprop="url">js作用域</a>
+          <h1 class="post-title" itemprop="name headline">js作用域
+
               
             
           </h1>
@@ -459,9 +462,7 @@
       
 
       
-        
-          
-            <p>在看了js高级程序设计的作用域相关知识之后，正好看到冴羽的原型原型链、词法作用域相关文章之后觉得自己有必要将自己的理解写下来。</p>
+        <p>在看了js高级程序设计的作用域相关知识之后，正好看到冴羽的原型原型链、词法作用域相关文章之后觉得自己有必要将自己的理解写下来。</p>
 <h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>在es5中是没有块级作用域的，所以会出现一些有趣的现象，如下面这段代码</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">   <span class="keyword">var</span> myName = <span class="string">"Jack"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(myName); <span class="comment">// "Jack"</span></span><br></pre></td></tr></table></figure>
 <p>这一点是和其他语言有区别的，记得自己js入坑碰到的第一个问题就是这个问题<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>btn1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>btn2<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>btn3<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -473,8 +474,6 @@
 <h2 id="谈谈闭包为什么存在"><a href="#谈谈闭包为什么存在" class="headerlink" title="谈谈闭包为什么存在"></a>谈谈闭包为什么存在</h2><p>最近看了js的垃圾收集机制，于是乎关联的思考了一下闭包，通俗的理解闭包就是一个函数能访问另一个函数内部的变量。我们都知道，闭包有一个很重要的特性就是可以让内部变量始终保存在内存中，我们来看看js中的垃圾收集机制：<br><em>Javascript中最常用的垃圾收集方式是标记清除，当变量进入环境时，就将变量标记为”进入环境”，当变量离开环境是，则将变量标记为”离开环境”，浏览器会定时的将标记为”离开环境”的变量从内存中清除。</em><br>再之前用的闭包的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">btns[i].onclick = (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i);</span><br></pre></td></tr></table></figure></p>
 <p>变量i是第一个函数作用域内的变量，第一个函数执行结束，返回了第二个函数，但是第二个函数却一只使用着第一个函数作用域内的变量，也就是说这个变量永远不会被标记为”离开环境”的状态，所以闭包能够一只存在与内存之中，这只是我个人的思考，如果有误请指出。</p>
 
-          
-        
       
     </div>
 
@@ -495,14 +494,22 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/js高级程序设计/" rel="tag"># js高级程序设计</a>
+          
+            <a href="/tags/冴羽的博客/" rel="tag"># 冴羽的博客</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -512,14 +519,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -539,8 +547,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -648,6 +665,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.</span> <span class="nav-text">块级作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的作用域"><span class="nav-number">2.</span> <span class="nav-text">函数的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谈谈闭包为什么存在"><span class="nav-number">3.</span> <span class="nav-text">谈谈闭包为什么存在</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -776,6 +810,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -791,6 +829,8 @@
 
   
 
+
+  
 
 
   
