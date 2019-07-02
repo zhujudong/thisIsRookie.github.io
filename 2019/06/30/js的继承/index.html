@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="js的继承">
-<meta name="keywords" content="js高级程序设计,">
+  <meta name="description" content="写在前面众所周知 JavaScript 是一门弱类型的动态语言，不用对变量类型过多操心可以更多的关注变量本身这是它吸引我的地方，这也是 JavaScript 的魅力所在。那么在 JavaScript 中我们应该如何模拟继承，有以下的几种方式： 原型链继承1234567891011121314151617function Parent () &amp;#123;    this.name = &apos;joker&apos;">
+<meta name="keywords" content="js高级程序设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js的继承">
 <meta property="og:url" content="/2019/06/30/js的继承/index.html">
 <meta property="og:site_name" content="朱举东博客">
-<meta property="og:description" content="js的继承">
+<meta property="og:description" content="写在前面众所周知 JavaScript 是一门弱类型的动态语言，不用对变量类型过多操心可以更多的关注变量本身这是它吸引我的地方，这也是 JavaScript 的魅力所在。那么在 JavaScript 中我们应该如何模拟继承，有以下的几种方式： 原型链继承1234567891011121314151617function Parent () &amp;#123;    this.name = &apos;joker&apos;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-30T10:04:06.004Z">
+<meta property="og:updated_time" content="2019-07-02T03:29:48.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js的继承">
-<meta name="twitter:description" content="js的继承">
+<meta name="twitter:description" content="写在前面众所周知 JavaScript 是一门弱类型的动态语言，不用对变量类型过多操心可以更多的关注变量本身这是它吸引我的地方，这也是 JavaScript 的魅力所在。那么在 JavaScript 中我们应该如何模拟继承，有以下的几种方式： 原型链继承1234567891011121314151617function Parent () &amp;#123;    this.name = &apos;joker&apos;">
 
 
 
@@ -391,12 +391,24 @@
                 
               
 
-              <time title="创建时间：2019-06-30 18:01:24 / 修改时间：18:04:06" itemprop="dateCreated datePublished" datetime="2019-06-30T18:01:24+08:00">2019-06-30</time>
+              <time title="创建时间：2019-06-30 18:01:24" itemprop="dateCreated datePublished" datetime="2019-06-30T18:01:24+08:00">2019-06-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-02 11:29:48" itemprop="dateModified" datetime="2019-07-02T11:29:48+08:00">2019-07-02</time>
               
             
           </span>
@@ -448,7 +460,13 @@
       
 
       
-        <p>js的继承</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>众所周知 JavaScript 是一门弱类型的动态语言，不用对变量类型过多操心可以更多的关注变量本身这是它吸引我的地方，这也是 JavaScript 的魅力所在。那么在 JavaScript 中我们应该如何模拟继承，有以下的几种方式：</p>
+<h2 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'joker'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child1.getName()) <span class="comment">// joker</span></span><br></pre></td></tr></table></figure>
+<p>上面代码为 Child 的原型赋值为 Parent 的实例的方式达到可访问到 Parent 中 name 属性的目的，但实际上这种方式的缺点很明显，引用类型的属性被所有实例共享，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.names = [<span class="string">'joker'</span>, <span class="string">'jack'</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child();</span><br><span class="line"></span><br><span class="line">child1.names.push(<span class="string">'rose'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child1.names); <span class="comment">// ["joker", "jack", "rose"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child2 = <span class="keyword">new</span> Child();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child2.names); <span class="comment">// ["joker", "jack", "rose"]</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.names = [<span class="string">'jack'</span>, <span class="string">'rose'</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line">child1.names.push(<span class="string">'bob'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child1.names); <span class="comment">// ["jack", "rose", "bob"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child2 = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child2.names); <span class="comment">// ["jack", "rose"]</span></span><br></pre></td></tr></table></figure>
+<p>这种方式避免了原型继承的属性被所有实例共享的缺点，同是还可以在 Child 中向 Parent 传参，但是方法都在构造函数中定义，每次创建实例都会创建一遍方法。</p>
+<h2 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h2><p>原型链继承和经典继承的组合<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.colors = [<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    Parent.call(<span class="keyword">this</span>, name);</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> Parent();</span><br><span class="line">Child.prototype.constructor = Child;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child(<span class="string">'kevin'</span>, <span class="string">'18'</span>);</span><br><span class="line"></span><br><span class="line">child1.colors.push(<span class="string">'black'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child1.name); <span class="comment">// kevin</span></span><br><span class="line"><span class="built_in">console</span>.log(child1.age); <span class="comment">// 18</span></span><br><span class="line"><span class="built_in">console</span>.log(child1.colors); <span class="comment">// ["red", "blue", "green", "black"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child2 = <span class="keyword">new</span> Child(<span class="string">'daisy'</span>, <span class="string">'20'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child2.name); <span class="comment">// daisy</span></span><br><span class="line"><span class="built_in">console</span>.log(child2.age); <span class="comment">// 20</span></span><br><span class="line"><span class="built_in">console</span>.log(child2.colors); <span class="comment">// ["red", "blue", "green"]</span></span><br></pre></td></tr></table></figure></p>
+<p>优点：融合原型链继承和构造函数的优点，是 JavaScript 中最常用的继承模式。</p>
 
       
     </div>
@@ -472,7 +490,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js高级程序设计/" rel="tag"># js高级程序设计,</a>
+            <a href="/tags/js高级程序设计/" rel="tag"># js高级程序设计</a>
           
         </div>
       
@@ -537,8 +555,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -593,9 +620,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -648,6 +673,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链继承"><span class="nav-number">2.</span> <span class="nav-text">原型链继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数继承"><span class="nav-number">3.</span> <span class="nav-text">构造函数继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合继承"><span class="nav-number">4.</span> <span class="nav-text">组合继承</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
